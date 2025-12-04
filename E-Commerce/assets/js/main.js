@@ -35,8 +35,18 @@ function showError(message) {
 // =========================
 async function loadProducts() {
   try {
-    const res = await axios.get("https://fakestoreapi.com/products");
-    allProducts = res.data;
+    const saved = localStorage.getItem("products");
+
+    if (saved) {
+      allProducts = JSON.parse(saved);
+    } else {
+      const res = await axios.get("https://fakestoreapi.com/products");
+      allProducts = res.data;
+
+      // Save to localStorage permanently
+      localStorage.setItem("products", JSON.stringify(allProducts));
+    }
+
     filteredProducts = allProducts;
 
     renderProducts(filteredProducts, productsContainer);
@@ -46,6 +56,7 @@ async function loadProducts() {
     showSpinner(false);
   }
 }
+
 
 // =========================
 // Render Product Cards
@@ -233,15 +244,44 @@ function highlightBasketItems() {
 // =========================
 // Delete Button
 // =========================
+
+function deleteProduct(id) {
+  let products = JSON.parse(localStorage.getItem("products")) || [];
+
+  // Remove product
+  products = products.filter(p => p.id !== id);
+
+  // Save back to localStorage
+  localStorage.setItem("products", JSON.stringify(products));
+
+  // Update UI list
+  allProducts = products;
+  filteredProducts = products;
+
+  renderProducts(filteredProducts, productsContainer);
+
+  Swal.fire({
+    icon: "success",
+    title: "Product deleted",
+    timer: 1500,
+    showConfirmButton: false
+  });
+}
+
 function attachDeleteEvents() {
   const deleteBtns = document.querySelectorAll(".delete-index-btn");
 
-  deleteBtns.forEach((btn) => {
+  deleteBtns.forEach((btn, index) => {
     btn.addEventListener("click", () => {
-      btn.closest(".col-md-3").remove();
+      const productIndex = (currentPage - 1) * itemsPerPage + index;
+      const product = filteredProducts[productIndex];
+
+      deleteProduct(product.id);
     });
   });
 }
+
+
 
 // =========================
 // Go To Details
