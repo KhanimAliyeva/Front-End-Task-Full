@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wishlist</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="./assets/css/style.css" />
+</head>
+
+<body>
+  <!-- NAVBAR  -->
+  <nav class="navbar navbar-expand-lg navbar-light shadow-sm custom-nav">
+    <div class="container">
+      <a class="navbar-brand font-weight-bold" href="./index.html">
+        <i class="fas fa-shopping-bag text-primary"></i> E-Commerce
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarScroll">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link menu-item" href="index.html">
+              <i class="fa-regular fa-house"></i>
+            </a>
+          </li>
+
+          <li class="nav-item position-relative mx-2">
+            <a class="nav-link menu-item" href="wishlist.html">
+              <i class="fa-regular fa-heart"></i>
+              <span class="count-badge" id="wishCount">0</span>
+            </a>
+          </li>
+
+          <li class="nav-item position-relative mx-2">
+            <a class="nav-link menu-item" href="basket.html">
+              <i class="fa-solid fa-basket-shopping"></i>
+              <span class="count-badge" id="cartCount">0</span>
+            </a>
+          </li>
+        </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control search-box" type="search" placeholder="Search" />
+          <button class="btn btn-primary ml-2" type="submit">Search</button>
+
+          <button id="themeToggle" class="btn btn-light ml-3 rounded-circle dark-btn" type="button">
+            <i class="fa-regular fa-moon"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- PAGE TITLE -->
+  <div class="container my-5">
+    <div class="row">
+      <!-- LEFT: PRODUCTS -->
+      <div class="col-md-8">
+        <h2 class="section-title mb-4">My Basket</h2>
+
+        <div id="emptyBasket" class="text-center text-muted d-none">
+          <i class="fa-solid fa-basket-shopping fa-3x mb-3"></i>
+          <p class="lead">Your basket is empty.</p>
+        </div>
+
+        <div class="row" id="basketContainer"></div>
+      </div>
+
+      <!-- RIGHT: SUMMARY -->
+      <div class="col-md-4">
+        <div class="cart-summary p-4 d-none" id="cartSummary">
+          <h4 class="mb-3">Order Summary</h4>
+
+          <div class="d-flex justify-content-between mb-2">
+            <span>Subtotal:</span>
+            <span id="subtotalPrice">$0.00</span>
+          </div>
+
+          <div class="d-flex justify-content-between mb-2">
+            <span>Tax (10%):</span>
+            <span id="taxAmount">$0.00</span>
+          </div>
+
+          <hr />
+
+          <div class="d-flex justify-content-between total-line">
+            <strong>Total:</strong>
+            <strong id="totalPrice">$0.00</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer text-center text-white">
+    <p>© 2025 E-Commerce. All rights reserved.</p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script type="module" src="./assets/js/basket.js"></script>
+</body>
+
+</html>
